@@ -3,7 +3,9 @@ package net.xdclass.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
+import net.xdclass.component.StoreEngine;
 import net.xdclass.config.AccountConfig;
+import net.xdclass.config.MinioConfig;
 import net.xdclass.controller.req.AccountRegisterReq;
 import net.xdclass.enums.AccountRoleEnum;
 import net.xdclass.enums.BizCodeEnum;
@@ -11,10 +13,12 @@ import net.xdclass.exception.BizException;
 import net.xdclass.mapper.AccountMapper;
 import net.xdclass.model.AccountDO;
 import net.xdclass.service.AccountService;
+import net.xdclass.utils.CommonUtil;
 import net.xdclass.utils.SpringBeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -25,6 +29,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountMapper accountMapper;
+
+    @Autowired
+    private StoreEngine fileStoreEngine;
+
+    @Autowired
+    private MinioConfig minioConfig;
 
     /**
      * 1.查询手机号是否重复
@@ -48,8 +58,16 @@ public class AccountServiceImpl implements AccountService {
         accountDO.setRole(AccountRoleEnum.COMMON.name());
         accountMapper.insert(accountDO);
 
-        //其他
+        //其他相关初始化操作
 
 
+    }
+
+    @Override
+    public String uploadAvatar(MultipartFile file) {
+        String filename = CommonUtil.getFilePath(file.getOriginalFilename());
+
+        fileStoreEngine.upload(minioConfig.getAvatarBucketName(), filename, file);
+        return minioConfig.getEndpoint() + "/" + minioConfig.getAvatarBucketName() + "/" + filename;
     }
 }
