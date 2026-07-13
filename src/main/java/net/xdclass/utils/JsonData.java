@@ -1,10 +1,10 @@
-package net.xdclass.dcloud_aipan.utils;
+package net.xdclass.utils;
 
 import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.xdclass.dcloud_aipan.enums.BizCodeEnum;
+import net.xdclass.enums.BizCodeEnum;
 
 @Data
 @AllArgsConstructor

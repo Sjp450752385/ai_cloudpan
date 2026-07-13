@@ -128,6 +128,13 @@
 			<version>4.4.0</version>
 		</dependency>
 
+		<!---不用的minio原生操作 -->
+<!--		<dependency>-->
+<!--			<groupId>io.minio</groupId>-->
+<!--			<artifactId>minio</artifactId>-->
+<!--			<version>8.3.7</version>-->
+<!--		</dependency>-->
+
 	</dependencies>
 
 	<build>

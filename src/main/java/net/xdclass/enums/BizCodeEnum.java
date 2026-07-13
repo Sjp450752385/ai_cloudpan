@@ -1,4 +1,4 @@
-package net.xdclass.dcloud_aipan.enums;
+package net.xdclass.enums;
 
 import lombok.Getter;
 
@@ -21,6 +21,7 @@ public enum BizCodeEnum {
     FILE_CHUNK_TASK_NOT_EXISTS( 230408, "分片任务不存在"),
     FILE_CHUNK_NOT_ENOUGH( 230409, "分片数量不匹配，合并不够"),
     FILE_STORAGE_NOT_ENOUGH( 240403, "存储空间不足"),
+    FILE_STORAGE_ERROR(240500, "文件存储服务异常"),
     FILE_TARGET_PARENT_ILLEGAL( 250403, "目标父级目录不合法"),
     SHARE_CANCEL_ILLEGAL( 260403, "取消分享失败,参数不合法"),
     SHARE_CODE_ILLEGAL( 260404, "分享码不合法"),

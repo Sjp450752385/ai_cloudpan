@@ -1,4 +1,4 @@
-package net.xdclass.dcloud_aipan.utils;
+package net.xdclass.utils;
 
 import org.springframework.beans.BeanUtils;
 

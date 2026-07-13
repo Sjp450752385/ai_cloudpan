@@ -1,7 +1,7 @@
-package net.xdclass.dcloud_aipan.exception;
+package net.xdclass.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import net.xdclass.dcloud_aipan.utils.JsonData;
+import net.xdclass.utils.JsonData;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

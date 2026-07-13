@@ -1,7 +1,7 @@
-package net.xdclass.dcloud_aipan.exception;
+package net.xdclass.exception;
 
 import lombok.Data;
-import net.xdclass.dcloud_aipan.enums.BizCodeEnum;
+import net.xdclass.enums.BizCodeEnum;
 
 @Data
 public class BizException extends RuntimeException {
@@ -22,7 +22,7 @@ public class BizException extends RuntimeException {
     }
 
     public BizException(BizCodeEnum bizCodeEnum, Exception e){
-        super(bizCodeEnum.getMessage());
+        super(bizCodeEnum.getMessage(), e);
         this.code = bizCodeEnum.getCode();
         this.msg = bizCodeEnum.getMessage();
         this.detail = e.toString();
