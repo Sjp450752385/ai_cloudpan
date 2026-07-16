@@ -6,8 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import net.xdclass.component.StoreEngine;
 import net.xdclass.config.AccountConfig;
 import net.xdclass.config.MinioConfig;
+import net.xdclass.controller.req.AccountLoginReq;
 import net.xdclass.controller.req.AccountRegisterReq;
 import net.xdclass.controller.req.FolderCreateReq;
+import net.xdclass.dto.AccountDTO;
 import net.xdclass.enums.AccountRoleEnum;
 import net.xdclass.enums.BizCodeEnum;
 import net.xdclass.exception.BizException;
@@ -95,5 +97,18 @@ public class AccountServiceImpl implements AccountService {
 
         fileStoreEngine.upload(minioConfig.getAvatarBucketName(), filename, file);
         return minioConfig.getEndpoint() + "/" + minioConfig.getAvatarBucketName() + "/" + filename;
+    }
+
+    @Override
+    public AccountDTO login(AccountLoginReq req) {
+        //处理密码
+        String encryptPassword = DigestUtils.md5DigestAsHex(( AccountConfig.ACCOUNT_SALT+ req.getPassword()).getBytes());
+        QueryWrapper<AccountDO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone", req.getPhone()).eq("password", encryptPassword);
+        AccountDO accountDO = accountMapper.selectOne(queryWrapper);
+        if(accountDO == null){
+            throw new BizException(BizCodeEnum.ACCOUNT_PWD_ERROR);
+        }
+        return SpringBeanUtil.copyProperties(accountDO, AccountDTO.class);
     }
 }
