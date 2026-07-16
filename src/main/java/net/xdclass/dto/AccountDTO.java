@@ -1,10 +1,8 @@
 package net.xdclass.dto;
 
-import com.baomidou.mybatisplus.annotation.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +18,9 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@TableName("account")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(name = "AccountDO", description = "用户信息")
 public class AccountDTO implements Serializable {
 
